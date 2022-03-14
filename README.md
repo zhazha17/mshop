@@ -11,19 +11,36 @@
 
 ## 1.2 技术选型
 
-
+1. Vue 全家桶 + 组件化开发
+2. 前后端交互，利用 promise 编程式开发
+3. 利用 postman 进行接口测试
+4. 工程化项目利用 webpack，利用 vue-cli 脚手架进行开发，利用 eslint 进行代码规范检查
 
 ## 1.3 前端路由
 
+- vue-router 的理解和使用
+  - $router：路由器对象，包含一些操作路由的功能函数，来实现编程式导航（跳转路由）
+  - $route：当前路由对象，一些当前路由信息数据的容器，path/meta/query/params
+  - router-view/router-link/keep-alive
+
+项目路由的拆分（底部 tab 的切换）
+
+底部导航组件：FooterGuide
+
+导航路由组件：Msite/Order/Profile
+
 ## 1.4 API 接口
 
+API 接口：前后台交互的接口
 
+一个接口是4个信息的集合
+
+- URL：请求地址
+- 请求方式
+- 请求参数的方式
+- 响应数据的格式
 
 ## 1.5 项目 vue 组件
-
-
-
-
 
 ## 1.6 从项目中学到什么
 
@@ -40,19 +57,12 @@
 
 1. 学会使用 vue-router 开发单页应用
 2. 学会使用 axios/vue-resource 与后端进行数据交互
-3. 学会使用 vuex 管理应用组件状态
-4. 学会使用 better-scroll/vue-scroller 实现页面滑动效果
-5. 学会使用 mint-ui 组件库构建页面
-6. 学会使用 vue-lazyload 实现图片懒加载
-7. 学会使用 mockjs 模拟后端数据接口
+3. 学会使用 mint-ui 组件库构建页面
 
 ### 1.6.3 样式/布局/效果相关
 
 1. 学会使用 less 编写模块化的 css
-2. 学会使用  Vue.js 的过渡编写酷炫的交互动画
-3. 学会制作并使用图标字体
-4. 学会解决移动端 1px 边框问题
-5. 学会移动端经典的 css sticky footer 布局
+2. 学会制作并使用图标字体
 6. 学会 flex 弹性布局
 
 # 2 应用开发
@@ -79,16 +89,16 @@ npm run dev
 ``````
 mshop 
 	|-- build：webpack 相关的配置文件夹
-     |-- node_modules：依赖√
-     |-- src：源码文件夹√
+     |-- node_modules：依赖
+     |-- src：源码文件夹
      	|-- main.js：应用入口 js 
      |-- static：静态资源文件夹
      |-- babel.config.js：babel 的配置文件
-     |-- .editorconfig：通过编辑器的编码/格式进行一定的配置√
-     |-- .eslintrc.js：eslint 检查的配置√
-     |-- .gitignore：git 版本管制忽略的配置√
-     |-- index.html：主页面文件√
-     |-- package.json：应用包配置文件√
+     |-- .editorconfig：通过编辑器的编码/格式进行一定的配置
+     |-- .eslintrc.js：eslint 检查的配置
+     |-- .gitignore：git 版本管制忽略的配置
+     |-- index.html：主页面文件
+     |-- package.json：应用包配置文件
      |-- README.md：应用描述说明的 readme 文件
 ``````
 
@@ -116,14 +126,7 @@ mshop
 
 ## 2.3 资源准备
 
-### 2.3.1 相关概念
-
-1. 标注图(设计稿)：对应用界面各个组成元素进行坐标/大小/颜色等进行标签的界面图
-2. 切图：将应用界面的一些静态图形部分，通过工具(如 photoshop)剪裁生成的图片
-3. 图片 Base64：样式中引用的小图片，在 webpack 打包会自动处理转换为样式内部的 Base64 编码字符串
-4. 2x 和 3x 图：不同手机的屏幕密度不一样，一般都在 2 以上，为了适配不同的手机，UI 设计师为同一个图片制作了 2x 和 3x 的 2 套图片
-
-### 2.3.2 iconfont 图标字体
+### 2.3.1 iconfont 图标字体
 
 1. iconfont 介绍
    - 意义：使用字体用 HTML 代码以文本的形式直接在网页中画 icon 小图标
@@ -142,14 +145,12 @@ mshop
 <i class="iconfont icon-arrow-left"></i>
 `````
 
-### 2.3.3 项目源码目录设计
+### 2.3.2 项目源码目录设计
 
 - components 路由组件文件夹
   - 非路由组件文件
   - pages 路由组件文件夹
-- mock 模拟数据接口文件
 - router 路由器文件夹
-- store vuex相关模块文件夹
 - App.vue 应用组件
 - main.js 入口 js
 - assets 通过资源文件夹，如 fonts/img/css
@@ -166,8 +167,6 @@ src
 		|-- pages--------------路由组件文件夹
 			|-- Msite--------------首页组件文件夹
 				|-- Msite.vue--------------首页组件 vue
-			|-- Search--------------搜索组件文件夹
-				|-- Search.vue--------------搜索组件 vue
 			|-- Order--------------订单组件文件夹
 				|-- Order.vue--------------订单组件 vue
 			|-- Profile--------------个人组件文件夹
@@ -508,23 +507,6 @@ Vue.component(Checklist.name, Checklist);
 ```````
 
 如果要修改样式，要在类名的的前面加 `/deep/`
-
-# 3 后台应用
-
-### 3.1 说明
-
-- 这是一个前后端分离的项目
-- 后台应用负责处理前台应用提交的请求，并为前台应用返回 json 数据
-- 前台应用负责显示数据，与用户交互，与后台应用交互
-
-### 3.2 运行后台应用
-
-1. 确保启动 mongodb 服务，用管理员身份打开 cmd，执行`net start mongodb` 命令
-2. 启动服务器应用 `npm start`
-3. 在 postman 中测试 API 接口文档中的接口
-
-
-
 
 
 
